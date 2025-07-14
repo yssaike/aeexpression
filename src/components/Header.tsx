@@ -1,6 +1,7 @@
 import React from 'react';
-import { Search, Moon, Sun, Heart, Code, Zap } from 'lucide-react';
+import { Search, Heart, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { ToggleSwitch } from './ToggleSwitch';
 
 interface HeaderProps {
   isDarkMode: boolean;
@@ -94,19 +95,13 @@ export const Header: React.FC<HeaderProps> = ({
               <Heart className={`w-4 h-4 ${showFavorites ? 'fill-current' : ''}`} />
             </motion.button>
 
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={onToggleDarkMode}
-              className={`p-2 rounded-lg border backdrop-blur-sm transition-all duration-300 ${
-                isDarkMode
-                  ? 'bg-gray-800/50 border-gray-700 text-yellow-400 hover:bg-gray-700/50'
-                  : 'bg-white/50 border-gray-300 text-gray-700 hover:bg-gray-50/80'
-              }`}
-              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </motion.button>
+            <ToggleSwitch
+              checked={isDarkMode}
+              onChange={onToggleDarkMode}
+              size="sm"
+              label=""
+              className="ml-2"
+            />
           </div>
         </div>
       </div>
