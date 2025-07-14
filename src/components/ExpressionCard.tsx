@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Copy, Heart, ChevronDown, ChevronUp, Check, Star, Clock } from 'lucide-react';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomOneDark, atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { AnimationPreview } from './AnimationPreview';
 import { Expression } from '../types';
 
 interface ExpressionCardProps {
@@ -62,7 +63,13 @@ export const ExpressionCard: React.FC<ExpressionCardProps> = ({
     >
       {/* Card Header */}
       <div className="p-6">
-        <div className="flex items-start justify-between mb-4">
+        <div className="flex items-start gap-4 mb-4">
+          {/* Animation Preview */}
+          <AnimationPreview 
+            expressionType={expression.category} 
+            isDarkMode={isDarkMode} 
+          />
+          
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
               <h3 className={`text-lg font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -75,9 +82,9 @@ export const ExpressionCard: React.FC<ExpressionCardProps> = ({
             <p className={`text-sm leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               {expression.description}
             </p>
-          </div>
-          
-          <div className="flex items-center gap-2 ml-4">
+            
+            {/* Action Buttons - moved under description */}
+            <div className="flex items-center gap-2 mt-3">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -110,6 +117,7 @@ export const ExpressionCard: React.FC<ExpressionCardProps> = ({
             >
               {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
             </motion.button>
+            </div>
           </div>
         </div>
 
